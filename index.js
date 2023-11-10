@@ -1,7 +1,7 @@
 import axios from "axios";
 import { mapNodesAndText } from "./utils/translateDOM";
 
-class BhashiniTranslator {
+export class BhashiniTranslator {
   #pipelineData;
   #apiKey;
   #userID;
