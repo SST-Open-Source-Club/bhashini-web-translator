@@ -1,5 +1,6 @@
 import axios from "axios";
 import { mapNodesAndText } from "./utils/translateDOM";
+import { urlToDOM } from "./utils/convert";
 
 export class BhashiniTranslator {
   #pipelineData;
@@ -50,7 +51,6 @@ export class BhashiniTranslator {
     );
 
     this.#pipelineData = response.data;
-    return true;
   }
 
   async #translate(content, sourceLanguage, targetLanguage) {
@@ -116,5 +116,18 @@ export class BhashiniTranslator {
         node.textContent = translated;
       });
     });
+    return dom;
+  }
+
+  async translateHTMLstring(html, sourceLanguage, targetLanguage) {
+    const dom = htmlStringToDOM(html);
+    await this.translateDOM(dom, sourceLanguage, targetLanguage);
+    return dom;
+  }
+
+  async translateUrl(text, sourceLanguage, targetLanguage) {
+    const dom = await urlToDOM(text);
+    await this.translateDOM(dom, sourceLanguage, targetLanguage);
+    return dom;
   }
 }
