@@ -17,20 +17,14 @@ export class BhashiniTranslator {
   }
 
   async #getPipeline(sourceLanguage, targetLanguage) {
-    if (!apiKey || !userID) {
-      throw new Error("Invalid Languages");
-    }
     this.#sourceLanguage = sourceLanguage;
     this.#targetLanguage = targetLanguage;
     const apiUrl =
       "https://meity-auth.ulcacontrib.org/ulca/apis/v0/model/getModelsPipeline";
-    const response = await axios.post(apiUrl, {
-      headers: {
-        ulcaApiKey: this.#apiKey,
-        userID: this.#userID,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+
+    const response = await axios.post(
+      apiUrl,
+      JSON.stringify({
         pipelineTasks: [
           {
             taskType: "translation",
@@ -46,7 +40,14 @@ export class BhashiniTranslator {
           pipelineId: "64392f96daac500b55c543cd",
         },
       }),
-    });
+      {
+        headers: {
+          ulcaApiKey: this.#apiKey,
+          userID: this.#userID,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     this.#pipelineData = response.data;
     return true;
@@ -62,12 +63,9 @@ export class BhashiniTranslator {
       this.#pipelineData.pipelineInferenceAPIEndPoint.inferenceApiKey.value;
     const serviceId =
       this.#pipelineData.pipelineResponseConfig[0].config.serviceId;
-    const resp = await axios.post(callbackURL, {
-      headers: {
-        Authorization: inferenceApiKey,
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
+    const resp = await axios.post(
+      callbackURL,
+      JSON.stringify({
         pipelineTasks: [
           {
             taskType: "translation",
@@ -88,7 +86,13 @@ export class BhashiniTranslator {
           ],
         },
       }),
-    });
+      {
+        headers: {
+          Authorization: inferenceApiKey,
+          "Content-type": "application/json",
+        },
+      }
+    );
     return resp.data.pipelineResponse[0].output[0].target;
   }
 
@@ -113,8 +117,4 @@ export class BhashiniTranslator {
       });
     });
   }
-
-  //TODOs
-  // Translate html string i.e. parse it to dom then call translateDOM
-  // Translate a webpage
 }
