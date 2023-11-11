@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const htmlStringToDOM = (html) => {
   let dom;
   try {
@@ -11,14 +9,4 @@ export const htmlStringToDOM = (html) => {
     );
   }
   return dom;
-};
-
-export const urlToDOM = async (url) => {
-  let data;
-  try {
-    data = (await axios.get(url)).data;
-  } catch (e) {
-    throw new Error("An error occurred while fetching html from the url");
-  }
-  return htmlStringToDOM(data);
 };
