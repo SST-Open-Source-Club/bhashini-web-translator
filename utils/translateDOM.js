@@ -18,7 +18,7 @@ export const mapNodesAndText = (element, map) => {
     !IGNORE_NODES.includes(element.nodeName)
   ) {
     element.childNodes.forEach((child) => {
-      changeInnerText(child);
+      mapNodesAndText(child, map);
     });
   }
 };
