@@ -1,19 +1,19 @@
 {
-  "name": "@probablyarth/bhashini",
-  "version": "0.0.1",
+  "name": "@scaler-school-of-technology/bhashini-web-translator",
+  "version": "0.0.3",
   "description": "Webpage Translator for specialized for Regional Languages. Built using Bhashini APIs",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/probablyArth/bhashini-web-translator.git"
+    "url": "git+https://github.com/SST-Open-Source-Club/bhashini-web-translator.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "probablyarth <probablyarth@gmail.com> (https://github.com/probablyarth)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/probablyArth/bhashini-web-translator/issues"
+    "url": "https://github.com/SST-Open-Source-Club/bhashini-web-translator/issues"
   },
-  "homepage": "https://github.com/probablyArth/bhashini-web-translator#readme",
+  "homepage": "https://github.com/SST-Open-Source-Club/bhashini-web-translator#readme",
   "dependencies": {
     "axios": "^1.6.1"
   }
