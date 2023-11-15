@@ -3,7 +3,7 @@ const IGNORE_NODES = ["SCRIPT", "STYLE"];
 export const mapNodesAndText = (element, map) => {
   if (
     element &&
-    element.nodeType === Node.TEXT_NODE &&
+    element.nodeType === 3 &&
     element.textContent.trim().replaceAll("\n", "")
   ) {
     let text = element.textContent.trim();
@@ -14,7 +14,7 @@ export const mapNodesAndText = (element, map) => {
     }
   } else if (
     element &&
-    element.nodeType === Node.ELEMENT_NODE &&
+    element.nodeType === 1 &&
     !IGNORE_NODES.includes(element.nodeName)
   ) {
     element.childNodes.forEach((child) => {
