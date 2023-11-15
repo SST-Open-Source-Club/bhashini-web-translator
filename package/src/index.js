@@ -1,8 +1,8 @@
 import axios from "axios";
-import { mapNodesAndText } from "./utils/translateDOM";
-import { urlToDOM, htmlStringToDOM } from "./utils/convert";
+import { mapNodesAndText } from "./utils/translateDOM.js";
+import { htmlStringToDOM } from "./utils/convert.js";
 
-export class BhashiniTranslator {
+class BhashiniTranslator {
   #pipelineData;
   #apiKey;
   #userID;
@@ -106,21 +106,29 @@ export class BhashiniTranslator {
     }
     const map = new Map();
     mapNodesAndText(dom, map);
-    map.forEach(async (nodes, text) => {
+    for (const [text, nodes] of map) {
       const translated = await this.#translate(
         text,
         this.#sourceLanguage,
         this.#targetLanguage
       );
+
       nodes.forEach((node) => {
         node.textContent = translated;
       });
-    });
+    }
     return dom;
   }
 
   async translateHTMLstring(html, sourceLanguage, targetLanguage) {
     const dom = htmlStringToDOM(html);
-    return await this.translateDOM(dom.body, sourceLanguage, targetLanguage);
+    const translated = await this.translateDOM(
+      dom,
+      sourceLanguage,
+      targetLanguage
+    );
+    return translated;
   }
 }
+
+export default BhashiniTranslator;
