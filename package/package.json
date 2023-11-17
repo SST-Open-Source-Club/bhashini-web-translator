@@ -3,6 +3,7 @@
   "version": "0.0.20",
   "description": "Webpage Translator for specialized for Regional Languages. Built using Bhashini APIs",
   "main": "src/index.js",
+  "scripts" : { "test": "node src/utils/convert.test.js && node src/utils/translateDOM.test.js && node src/index.test.js" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SST-Open-Source-Club/bhashini-web-translator.git"
