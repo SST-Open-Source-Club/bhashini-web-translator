@@ -1,0 +1,34 @@
+{
+  "name": "@scaler-school-of-technology/bhashini-web-translator",
+  "version": "0.0.22",
+  "description": "Webpage Translator for specialized for Regional Languages. Built using Bhashini APIs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SST-Open-Source-Club/bhashini-web-translator.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "probablyarth <probablyarth@gmail.com> (https://github.com/probablyarth)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SST-Open-Source-Club/bhashini-web-translator/issues"
+  },
+  "homepage": "https://github.com/SST-Open-Source-Club/bhashini-web-translator#readme",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "jsdom": "^22.1.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.23.3",
+    "jest": "^29.7.0"
+  },
+  "jest":{
+    "testTimeout": 10000,
+    "collectCoverage": true,
+    "coverageReporters": ["text", "cobertura"]
+  }
+}
