@@ -1,6 +1,6 @@
 // const express = require('express');
 import express from 'express';
-import BhashiniTranslator from '@scaler-school-of-technology/bhashini-web-translator';
+import BhashiniTranslator from '@scaler-school-of-technology/bhashini-web-translator-node';
 import dotenv from 'dotenv';
 import { fetchBodyFromUrl } from './fetchHTML.js';
 
@@ -22,6 +22,7 @@ app.get('/translate', async (req, res) => {
 	var { url } = req.body;
 	// Remove quotes from url
 	// url = url.replace(/['"]+/g, '');
+	console.log(url);
 	let dta = await translate(url);
 	res.send(dta);
 });
@@ -29,7 +30,7 @@ app.get('/translate', async (req, res) => {
 const translate = async (url) => {
 	try {
 		const bodyContent = await fetchBodyFromUrl(url);
-		// console.log(bodyContent);
+		console.log(bodyContent);
 		const translated = (
 			await translator.translateHTMLstring(bodyContent, 'en', 'hi')
 		).outerHTML;
