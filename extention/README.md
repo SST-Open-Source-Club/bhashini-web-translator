@@ -1,9 +1,5 @@
 # Bashini Chrome Extention
 
-Certainly! To provide comprehensive documentation for your Chrome extension, I'll outline the key components, functionality, and necessary configurations. Please note that some details, like the extension's manifest file and potential background scripts, are assumed and not provided in the code snippet you shared.
-
-### Chrome Extension Documentation
-
 ### 1. **Overview:**
 
 - **Name:** Bhashini Translator Chrome Extension
