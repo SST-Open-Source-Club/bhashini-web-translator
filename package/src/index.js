@@ -8,7 +8,7 @@ class BhashiniTranslator {
   #userID;
   #sourceLanguage;
   #targetLanguage;
-
+  failcount = 0;
   constructor(apiKey, userID) {
     if (!apiKey || !userID) {
       throw new Error("Invalid credentials");
@@ -63,36 +63,48 @@ class BhashiniTranslator {
       this.#pipelineData.pipelineInferenceAPIEndPoint.inferenceApiKey.value;
     const serviceId =
       this.#pipelineData.pipelineResponseConfig[0].config.serviceId;
-    const resp = await axios.post(
-      callbackURL,
-      JSON.stringify({
-        pipelineTasks: [
-          {
-            taskType: "translation",
-            config: {
-              language: {
-                sourceLanguage,
-                targetLanguage,
-              },
-              serviceId,
-            },
-          },
-        ],
-        inputData: {
-          input: [
+    let resp;
+    try {
+      resp = await axios.post(
+        callbackURL,
+        JSON.stringify({
+          pipelineTasks: [
             {
-              source: content,
+              taskType: "translation",
+              config: {
+                language: {
+                  sourceLanguage,
+                  targetLanguage,
+                },
+                serviceId,
+              },
             },
           ],
-        },
-      }),
-      {
-        headers: {
-          Authorization: inferenceApiKey,
-          "Content-type": "application/json",
-        },
-      }
-    );
+          inputData: {
+            input: [
+              {
+                source: content,
+              },
+            ],
+          },
+        }),
+        {
+          headers: {
+            Authorization: inferenceApiKey,
+            "Content-type": "application/json",
+          },
+        }
+      );
+    } catch (e) {
+      if (this.failcount > 10)
+        throw new Error(
+          "Failed getting a response from the server after 10 tries"
+        );
+      this.failcount++;
+      this.#getPipeline(sourceLanguage, targetLanguage);
+      resp = await this.#translate(content, sourceLanguage, targetLanguage);
+    }
+    this.failcount = 0;
     return resp.data.pipelineResponse[0].output[0].target;
   }
 
@@ -106,17 +118,23 @@ class BhashiniTranslator {
     }
     const map = new Map();
     mapNodesAndText(dom, map);
+    const promises = [];
+
     for (const [text, nodes] of map) {
-      const translated = await this.#translate(
+      const promise = this.#translate(
         text,
         this.#sourceLanguage,
         this.#targetLanguage
-      );
-
-      nodes.forEach((node) => {
-        node.textContent = translated;
+      ).then((translated) => {
+        nodes.forEach((node) => {
+          node.textContent = translated;
+        });
       });
+
+      promises.push(promise);
     }
+
+    await Promise.all(promises);
     return dom;
   }
 
