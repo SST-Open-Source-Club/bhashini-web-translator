@@ -1,6 +1,6 @@
 {
   "name": "@scaler-school-of-technology/bhashini-web-translator",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Webpage Translator for specialized for Regional Languages. Built using Bhashini APIs",
   "main": "src/index.js",
   "repository": {
@@ -16,7 +16,6 @@
   },
   "homepage": "https://github.com/SST-Open-Source-Club/bhashini-web-translator#readme",
   "dependencies": {
-    "axios": "^1.6.2",
-    "jsdom": "^22.1.0"
+    "axios": "^1.6.2"
   }
 }
