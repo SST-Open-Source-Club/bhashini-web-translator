@@ -1,4 +1,4 @@
-# Bashini Web Translator
+# Bhashini Web Translator
 
 ## Bhashini Web Translator
 
