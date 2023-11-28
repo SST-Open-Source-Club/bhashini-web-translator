@@ -1,76 +1,87 @@
 # Bhashini Chrome Extension
 
-### 1. **Overview:**
+Bhashini Extension is a Chrome extension that allows users to translate web page content into local regional languages using the ULCA translation service.
 
-- **Name:** Bhashini Translator Chrome Extension
-- **Description:** A Chrome extension for translating the content of a webpage using BhashiniTranslator.
-- **Functionality:** Allows users to select source and target languages, then translates the content of the currently active tab.
+## Table of Contents
 
-### 2. **Files:**
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
 
-- **App.jsx:**
-    - React component for the extension's user interface.
-    - Handles language selection and triggers content translation.
-- **main.jsx:**
-    - Renders the `App` component using ReactDOM.
+## Introduction
 
-### 3. **Dependencies:**
+Bhashini Extension is a Chrome extension designed to make web content more accessible by providing translation capabilities for various languages. This document provides information on installing, configuring, and using the extension.
 
-- **React:**
-    - Used for building the user interface.
-- **BhashiniTranslator:**
-    - Handles translation using the Bhashini Translator API.
-    - Requires a valid API key and secret during instantiation.
+## Installation
 
-### 4. **Extension Structure:**
+To install Bhashini, follow these steps:
 
-- **Manifest File (`manifest.json`):**
-    - Contains metadata and configuration for the extension.
-    - Should include necessary permissions, icons, and scripts.
-- **Content Scripts:**
-    - Utilizes `chrome.scripting.executeScript` to interact with the content of the active tab.
+1. Clone the repository to your local machine:
 
-### 5. **User Interface:**
+    ```bash
+    git clone https://github.com/SST-Open-Source-Club/bhashini-web-translator/extension
+    cd bhashini-chrome-extension
+    ```
 
-- **Language Selection:**
-    - Provides dropdowns for selecting source and target languages.
-- **Translate Button:**
-    - Triggers the translation process.
+2. Load the extension into Chrome:
 
-### 6. **Translation Process:**
+    - Open Chrome and go to `chrome://extensions/`.
+    - Enable "Developer mode" in the top right corner.
+    - Click "Load unpacked" and select the extension directory.
 
-- **BhashiniTranslator Integration:**
-    - Utilizes BhashiniTranslator to translate the content of the webpage.
-    - Source language is determined by the user's selection.
-    - Target language is determined by the user's selection.
-- **ExecuteScript:**
-    - Uses `chrome.scripting.executeScript` to run scripts in the context of the active tab.
-    - Changes the background color of the webpage to red (example action).
-    - Translates the content of the webpage using BhashiniTranslator.
+3. Additional setup may be required based on your environment. Check the [Configuration](#configuration) section for details.
 
-### 7. **Usage:**
+## Usage
 
-- **Installation:**
-    - Install the extension from the Chrome Web Store or by loading an unpacked extension.
-- **Interaction:**
-    - Open a webpage and click the extension icon.
-    - Select source and target languages.
-    - Click the "Translate" button to see the translated content.
+Bhashini is easy to use. Follow these steps:
 
-### 8. **Configuration:**
+1. Click on the Bhashini icon in the Chrome toolbar to open the extension popup.
 
-- **BhashiniTranslator Credentials:**
-    - Ensure the API key and secret provided to BhashiniTranslator in `App.jsx` are valid.
-- **Manifest Configuration:**
-    - Configure the manifest file with appropriate permissions, icons, and other required settings.
+2. Select the source and target languages from the dropdown menus.
 
-### 9. **Notes:**
+3. Click the "Translate" button to initiate the translation process.
 
-- **Error Handling:**
-    - Implement error handling for BhashiniTranslator API calls.
-- **Security:**
-    - Keep API keys and secrets secure.
+4. The translated content will be displayed on the webpage.
 
-### Conclusion:
+For more detailed information, refer to the [Usage](#usage) section in the documentation.
 
-This documentation provides an overview of the Bhashini Translator Chrome Extension, covering its structure, functionality, usage, and configuration. Make sure to integrate this information with your manifest file and any additional scripts to create a fully functional extension.
+## Configuration
+
+Bhashini requires API key and user ID for authentication with the ULCA translation service. Follow these steps to configure the extension:
+
+1. Open the `BhashiniTranslator.js` file.
+
+2. Locate the following lines:
+
+    ```javascript
+    const Bhashini = new BhashiniTranslator(
+      "YOUR_ULCA_API_KEY",
+      "YOUR_USER_ID"
+    );
+    ```
+
+3. Replace `"YOUR_ULCA_API_KEY"` and `"YOUR_USER_ID"` with your ULCA API key and user ID.
+
+## Development
+
+If you want to contribute or modify the extension, follow these steps:
+
+1. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+2. Make changes and test your modifications.
+
+3. Submit a pull request with your changes.
+
+For more detailed information, refer to the [Development](#development) section in the documentation.
+
+## License
+
+Bhashini is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
