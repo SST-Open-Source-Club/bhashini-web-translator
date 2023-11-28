@@ -1,4 +1,4 @@
-# Bashini Chrome Extention
+# Bhashini Chrome Extension
 
 ### 1. **Overview:**
 

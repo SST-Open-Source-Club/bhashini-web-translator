@@ -24,7 +24,7 @@ Bhashini Web Translator is a versatile translation tool that includes various co
         - Install the npm package using `npm install @scaler-school-of-technology/bhashini-web-translator`.
 3. **Chrome Extension**
     - **Description:** The Chrome extension allows users to translate web page content using Bhashini Translator.
-    - **Folder:** `extention`
+    - **Folder:** `extension`
     - **Documentation:**
         - [Chrome Extension Documentation](/extension/README.md)
     - **Installation:**
