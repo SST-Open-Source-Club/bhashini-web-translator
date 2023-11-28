@@ -26,7 +26,7 @@ Bhashini Web Translator is a versatile translation tool that includes various co
     - **Description:** The Chrome extension allows users to translate web page content using Bhashini Translator.
     - **Folder:** `extention`
     - **Documentation:**
-        - [Chrome Extension Documentation](/extention/README.md)
+        - [Chrome Extension Documentation](/extension/README.md)
     - **Installation:**
         - Install the extension from the Chrome Web Store or by loading an unpacked extension.
     - **Usage:**
