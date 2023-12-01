@@ -65,7 +65,6 @@ class BhashiniTranslator {
       this.#pipelineData.pipelineResponseConfig[0].config.serviceId;
     let resp;
     try {
-      // making an input array
       const inputArray = contents.map((content) => ({
         source: content,
       }));
@@ -101,13 +100,24 @@ class BhashiniTranslator {
         );
       this.failcount++;
       this.#getPipeline(sourceLanguage, targetLanguage);
-      resp = await this.#translate(contents, sourceLanguage, targetLanguage);
+      return await this.#translate(contents, sourceLanguage, targetLanguage);
+    }
+    try {
+      let v = resp.pipelineResponse[0].output;
+    } catch (e) {
+      if (this.failcount > 10)
+        throw new Error(
+          "Failed getting a response from the server after 10 tries"
+        );
+      this.failcount++;
+      this.#getPipeline(sourceLanguage, targetLanguage);
+      return await this.#translate(contents, sourceLanguage, targetLanguage);
     }
     this.failcount = 0;
     return resp.pipelineResponse[0].output;
   }
 
-  async translateDOM(dom, sourceLanguage, targetLanguage) {
+  async translateDOM(dom, sourceLanguage, targetLanguage, batchSize) {
     if (
       !this.#pipelineData ||
       this.#sourceLanguage !== sourceLanguage ||
@@ -120,8 +130,6 @@ class BhashiniTranslator {
     mapNodesAndText(dom, map);
 
     const batchedTexts = Array.from(map.keys());
-
-    const batchSize = 10;
     const batches = [];
     for (let i = 0; i < batchedTexts.length; i += batchSize) {
       batches.push(batchedTexts.slice(i, i + batchSize));
@@ -132,7 +140,8 @@ class BhashiniTranslator {
       const translated = await this.#translate(
         combinedText,
         this.#sourceLanguage,
-        this.#targetLanguage
+        this.#targetLanguage,
+        batchSize
       );
 
       batch.forEach((text, index) => {
@@ -147,12 +156,13 @@ class BhashiniTranslator {
     return dom;
   }
 
-  async translateHTMLstring(html, sourceLanguage, targetLanguage) {
+  async translateHTMLstring(html, sourceLanguage, targetLanguage, batchSize) {
     const dom = htmlStringToDOM(html);
     const translated = await this.translateDOM(
       dom,
       sourceLanguage,
-      targetLanguage
+      targetLanguage,
+      batchSize
     );
     return translated;
   }
