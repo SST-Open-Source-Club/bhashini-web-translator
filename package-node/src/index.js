@@ -53,7 +53,7 @@ class BhashiniTranslator {
     this.#pipelineData = response.data;
   }
 
-  async #translate(content, sourceLanguage, targetLanguage) {
+  async #translate(contents, sourceLanguage, targetLanguage) {
     if (!this.#pipelineData) {
       throw new Error("pipelineData not found");
     }
@@ -65,9 +65,18 @@ class BhashiniTranslator {
       this.#pipelineData.pipelineResponseConfig[0].config.serviceId;
     let resp;
     try {
-      resp = await axios.post(
-        callbackURL,
-        JSON.stringify({
+      // making an input array
+      const inputArray = contents.map((content) => ({
+        source: content,
+      }));
+
+      resp = await fetch(callbackURL, {
+        method: "POST",
+        headers: {
+          Authorization: inferenceApiKey,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
           pipelineTasks: [
             {
               taskType: "translation",
@@ -81,20 +90,10 @@ class BhashiniTranslator {
             },
           ],
           inputData: {
-            input: [
-              {
-                source: content,
-              },
-            ],
+            input: inputArray,
           },
         }),
-        {
-          headers: {
-            Authorization: inferenceApiKey,
-            "Content-type": "application/json",
-          },
-        }
-      );
+      }).then((res) => res.json());
     } catch (e) {
       if (this.failcount > 10)
         throw new Error(
@@ -102,10 +101,10 @@ class BhashiniTranslator {
         );
       this.failcount++;
       this.#getPipeline(sourceLanguage, targetLanguage);
-      resp = await this.#translate(content, sourceLanguage, targetLanguage);
+      resp = await this.#translate(contents, sourceLanguage, targetLanguage);
     }
     this.failcount = 0;
-    return resp.data.pipelineResponse[0].output[0].target;
+    return resp.pipelineResponse[0].output;
   }
 
   async translateDOM(dom, sourceLanguage, targetLanguage) {
@@ -116,25 +115,35 @@ class BhashiniTranslator {
     ) {
       await this.#getPipeline(sourceLanguage, targetLanguage);
     }
+
     const map = new Map();
     mapNodesAndText(dom, map);
-    const promises = [];
 
-    for (const [text, nodes] of map) {
-      const promise = this.#translate(
-        text,
-        this.#sourceLanguage,
-        this.#targetLanguage
-      ).then((translated) => {
-        nodes.forEach((node) => {
-          node.textContent = translated;
-        });
-      });
+    const batchedTexts = Array.from(map.keys());
 
-      promises.push(promise);
+    const batchSize = 10;
+    const batches = [];
+    for (let i = 0; i < batchedTexts.length; i += batchSize) {
+      batches.push(batchedTexts.slice(i, i + batchSize));
     }
 
+    const promises = batches.map(async (batch) => {
+      const combinedText = batch;
+      const translated = await this.#translate(
+        combinedText,
+        this.#sourceLanguage,
+        this.#targetLanguage
+      );
+
+      batch.forEach((text, index) => {
+        map.get(text).forEach((node) => {
+          node.textContent = " " + translated[index].target + " ";
+        });
+      });
+    });
+
     await Promise.all(promises);
+
     return dom;
   }
 

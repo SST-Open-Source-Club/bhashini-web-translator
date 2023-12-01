@@ -1,6 +1,6 @@
 {
   "name": "@scaler-school-of-technology/bhashini-web-translator",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Webpage Translator for specialized for Regional Languages. Built using Bhashini APIs",
   "main": "src/index.js",
   "repository": {
