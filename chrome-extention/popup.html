@@ -8,40 +8,49 @@
   </head>
   <body>
     <div class="language-select-container">
-      <h1>Bhashini Translator</h1>
-      <label>Translate from:</label>
-      <select id="sourceLanguage">
-        <option value="en">English</option>
-        <option value="hi">Hindi</option>
-        <option value="ta">Tamil</option>
-        <option value="te">Telugu</option>
-        <option value="ml">Malayalam</option>
-        <option value="mr">Marathi</option>
-        <option value="bn">Bengali</option>
-        <option value="as">Assamese</option>
-        <option value="gu">Gujarati</option>
-        <option value="kn">Kannada</option>
-        <option value="or">Odia</option>
-        <option value="pa">Punjabi</option>
-      </select>
-
-      <label>Translate to:</label>
-      <select id="targetLanguage">
-        <option value="en">English</option>
-        <option value="hi">Hindi</option>
-        <option value="ta">Tamil</option>
-        <option value="te">Telugu</option>
-        <option value="ml">Malayalam</option>
-        <option value="mr">Marathi</option>
-        <option value="bn">Bengali</option>
-        <option value="as">Assamese</option>
-        <option value="gu">Gujarati</option>
-        <option value="kn">Kannada</option>
-        <option value="or">Odia</option>
-        <option value="pa">Punjabi</option>
-      </select>
-
-      <button id="translateButton">Translate</button>
+      <img src="images/logo.png" alt="Bhashini" class="logo">
+      <div id="selectCtn">
+        <label>Translate from:</label>
+        <select id="sourceLanguage">
+          <option value="en" id="sourceLanguage-option">English</option>
+          <option value="hi" id="sourceLanguage-option">Hindi</option>
+          <option value="ta" id="sourceLanguage-option">Tamil</option>
+          <option value="te" id="sourceLanguage-option">Telugu</option>
+          <option value="ml" id="sourceLanguage-option">Malayalam</option>
+          <option value="mr" id="sourceLanguage-option">Marathi</option>
+          <option value="bn" id="sourceLanguage-option">Bengali</option>
+          <option value="as" id="sourceLanguage-option">Assamese</option>
+          <option value="gu" id="sourceLanguage-option">Gujarati</option>
+          <option value="kn" id="sourceLanguage-option">Kannada</option>
+          <option value="or">Odia</option>
+          <option value="pa">Punjabi</option>
+        </select>
+      </div>
+      
+      <div id="selectCtn">
+        <label>Translate to:</label>
+        <select id="targetLanguage">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="ta">Tamil</option>
+          <option value="te">Telugu</option>
+          <option value="ml">Malayalam</option>
+          <option value="mr">Marathi</option>
+          <option value="bn">Bengali</option>
+          <option value="as">Assamese</option>
+          <option value="gu">Gujarati</option>
+          <option value="kn">Kannada</option>
+          <option value="or">Odia</option>
+          <option value="pa">Punjabi</option>
+        </select>
+      </div>
+      <div class="btn-container">
+        <button id="translateButton">Translate</button>
+      </div>
+      <div class="footer-ctn">
+        <label class="footer">Developed by</label>
+        <img src="images/scaler.png" alt="Bhashini" class="scaler-logo">
+      </div>
     </div>
     <script src="popup.js"></script>
   </body>

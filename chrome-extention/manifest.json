@@ -1,14 +1,15 @@
 {
     "manifest_version": 3,
-    "name": "Translate Extension",
+    "name": "Bhashini Translate Extension",
     "version": "1.0",
     "description": "Translate text on button click",
     "permissions": ["activeTab"],
   
     "action": {
       "default_popup": "popup.html",
-      "default_icon":"images/icon_dark.png",
-      "default_title":"Bhasini Translator"
+      "default_icon":"images/logo.png",
+      "default_title":"Bhasini Translator",
+      "default_icon.scale": 1
     },
   
     "background": {
@@ -16,7 +17,7 @@
     },
   
     "icons": {
-      "128": "images/icon.png"
+      "128": "images/logo.png"
     },
   
     "content_scripts": [

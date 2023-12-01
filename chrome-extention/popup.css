@@ -1,23 +1,81 @@
+*{
+  margin: 0;
+}
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
+    background-color: #fff;
     font-family: 'Roboto', sans-serif;
   }
   
   .language-select-container {
     background-color: #fff;
-    padding: 20px;
+    margin: 0px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
     transition: transform 0.3s ease-in-out;
+    width: 280px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
   }
+  #selectCtn{
+    width: 224px;
+    align-self: center;
+  }
+  .language-select-container select {
+    width: 224px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+    appearance: none; /* Remove default arrow in some browsers */
+    background-image: url('images/down.png'), linear-gradient(45deg, #f0f0f0, #f0f0f0); /* Add another icon with linear gradient */
+    background-size: 24px 24px, 100% 100%; 
+    background-position: right 8px center, right -15px center; 
+    background-repeat: no-repeat, no-repeat; 
+  }
+  .logo {
+    width: 86px;
+    height: 79px;
+    flex-shrink: 0;
+    align-self: flex-start; /* Align to the top */
+  } 
+  .translate-from{
+    margin: 1;
+    width: 224px;
+    height: 56px;
+    flex-shrink: 0;
+  }
+  .translate-to{
+    width: 224px;
+    height: 55px;
+    flex-shrink: 0;
+  }
+ 
   
-  .language-select-container:hover {
-    transform: scale(1.05);
+  .footer{
+    width: 56px;
+    height: 8px;
+    flex-shrink: 0;
+    color: #4B4B4B;
+
+    font-family: Inter;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .btn-container{
+    padding-top: 20px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+  }
+  .scaler-logo{
+    width: 60px;
+    height: 20px;
+    flex-shrink: 0;
   }
   
   .language-select-container h1 {
@@ -29,31 +87,48 @@ body {
   .language-select-container label {
     display: block;
     margin-top: 20px;
-    font-weight: 500;
   }
   
   .language-select-container select {
+    appearance: none;
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+    border: 1px solid #E7E7E7;;
+    border-radius: 0px;
   }
   
   .language-select-container button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+    margin-top: 15px;
+    width: 122px;
+    height: 24px;
+    flex-shrink: 0;
+    border: 1px solid rgba(67, 101, 190, 0.50);
+    background: #113CAF;
+    color: #FFF;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    align-self: center;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
   }
   
   .language-select-container button:hover {
-    background-color: #0056b3;
+    background-color: #113baf9a;
+  }
+  .language-select-container button:disabled{
+    background-color: #979797;
+  }
+  .footer-ctn{
+    margin-bottom: 5px;
+    margin-left: 5px;
+  }
+  label{
+    color: #5A5A5A;
+    font-size: 12px;
+    font-weight: bolder;
+    line-height: normal;
   }
