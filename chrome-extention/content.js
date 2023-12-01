@@ -168,7 +168,8 @@ class BhashiniTranslator {
       batch.forEach((text, index) => {
         map.get(text).forEach((node) => {
           // Check if the node's content matches the original text
-          node.textContent = translated[index].target;
+          node.textContent = " " + translated[index].target + " ";
+
         });
       });
     });
