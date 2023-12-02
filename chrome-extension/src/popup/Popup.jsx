@@ -102,11 +102,12 @@ export const Popup = () => {
           </button>
         )}
       </div>
-
+      <div className='footer-cont'>
       <footer className="footer-ctn">
         <label className="footer">Developed by</label>
         <img src="img/scaler.png" alt="Bhashini" className="scaler-logo" />
       </footer>
+      </div>
     </div>
   )
 }
