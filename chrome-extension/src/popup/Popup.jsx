@@ -28,9 +28,14 @@ export const Popup = () => {
           targetLanguage: targetLanguage,
         },
         (response) => {
-          if (response.message === 'success') {
+          if(response){
+            console.log(response);
             setTransalting(false)
           }
+        else{
+          console.log("error");
+        }
+       
         },
       )
     })
