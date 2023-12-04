@@ -28,9 +28,14 @@ export const Popup = () => {
           targetLanguage: targetLanguage,
         },
         (response) => {
-          if (response.message === 'success') {
+          if(response){
+            console.log(response);
             setTransalting(false)
           }
+        else{
+          console.log("error");
+        }
+       
         },
       )
     })
@@ -92,16 +97,15 @@ export const Popup = () => {
             Translate
           </button>
         ) : (
-          <button id="translateButton" disabled onClick={handleTranslateClick}>
-            Translating
-          </button>
+          <img src="/img/loading.png" alt="translating..." id='loading-img'/>
         )}
       </div>
-
+      <div className='footer-cont'>
       <footer className="footer-ctn">
         <label className="footer">Developed by</label>
         <img src="img/scaler.png" alt="Bhashini" className="scaler-logo" />
       </footer>
+      </div>
     </div>
   )
 }
