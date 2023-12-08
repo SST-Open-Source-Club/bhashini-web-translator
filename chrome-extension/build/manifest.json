@@ -1,0 +1,54 @@
+{
+  "name": "Bhashini Translate Extension",
+  "description": "Translate text on button click",
+  "version": "0.0.0",
+  "manifest_version": 3,
+  "icons": {
+    "128": "img/logo.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "img/logo.png"
+  },
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/index.js-loader-be6e01bc.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [],
+      "resources": [
+        "img/logo-16.png",
+        "img/logo-34.png",
+        "img/logo-48.png",
+        "img/logo-128.png"
+      ],
+      "use_dynamic_url": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "resources": [
+        "assets/chunk-3769f9bc.js"
+      ],
+      "use_dynamic_url": true
+    }
+  ],
+  "permissions": [
+    "sidePanel",
+    "storage"
+  ]
+}
