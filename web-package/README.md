@@ -1,103 +1,67 @@
-# Web Server
+# Web Package
 
-## Introduction
+# **Bhashini Web Translator**
 
-This Web Server is a JavaScript web server application that utilizes the Bhashini translation service to translate the content of a given web page from one language to another. This documentation provides an overview of the project structure and key components.
+Bhashini Web Translator is an npm package that enables seamless language translation integration into your web applications. It utilizes a pipeline-based translation approach using ULCA APIs, ensuring efficient and accurate translations.
 
-## Project Structure
+## **Installation**
 
-### 1. `index.js`
-
-This file serves as the main entry point for the Bhashini Web Translator application. It initializes an Express.js server, handles incoming requests, and utilizes the BhashiniTranslator and fetchHTML modules to translate web content.
-
-### Dependencies
-
-- `express`: A web application framework for Node.js.
-- `@scaler-school-of-technology/bhashini-web-translator`: Bhashini translation service client.
-- `dotenv`: Loads environment variables from a `.env` file.
-- `./fetchHTML.js`: Module for fetching the body element content from a given URL.
-
-### 2. `fetchHTML.js`
-
-This module provides functionality to fetch the HTML content of a web page and extract the body element content using Axios for HTTP requests and Cheerio for HTML parsing.
-
-### Dependencies
-
-- `axios`: A promise-based HTTP client for the browser and Node.js.
-- `cheerio`: A fast, flexible, and lean implementation of jQuery for the server.
-
-## Setup and Configuration
-
-1. Install dependencies:
-    
-    ```bash
-    npm install
-    
-    ```
-    
-2. Create a `.env` file in the project root with the following variables:
-    
-    ```
-    BHASHINI_API_KEY=<Your Bhashini API Key>
-    BHASHINI_USER_ID=<Your Bhashini User ID>
-    
-    ```
-    
-
-## Running the Server
-
-Start the Bhashini Web Translator server by running the following command:
+To install Bhashini Web Translator, use the following npm command:
 
 ```bash
-npm start
+npm install bhashini-web-translator
 
 ```
 
-The server will be accessible at `http://localhost:3000`.
+## **Usage**
 
-## Endpoints
+```jsx
+javascriptCopy code
+import BhashiniTranslator from 'bhashini-web-translator';
 
-### 1. `/`
+// Replace 'YOUR_API_KEY' and 'YOUR_USER_ID' with your ULCA API key and user ID
+const translator = new BhashiniTranslator('YOUR_API_KEY', 'YOUR_USER_ID');
 
-- **Method**: GET
-- **Description**: Welcome message for the Bhashini Web Translator app.
+// Example: Translate a DOM element
+const sourceLanguage = 'en';
+const targetLanguage = 'hi';
+const domElement = document.getElementById('yourElementId');
 
-### 2. `/translate`
+translator.translateDOM(domElement, sourceLanguage, targetLanguage, batchSize)
+  .then((translatedDOM) => {
+    // Handle the translated DOM
+    console.log(translatedDOM);
+  })
+  .catch((error) => {
+    console.error(error.message);
+  });
 
-- **Method**: GET
-- **Description**: Send the URL of the website to translate in the JSON format. The response will be the translated website
-- **Parameters**:
-    - `url` (string): The URL of the web page to be translated.
+// Example: Translate an HTML string
+const htmlString = '<p>This is a sample text</p>';
 
-## Usage
+translator.translateHTMLstring(htmlString, sourceLanguage, targetLanguage, batchSize)
+  .then((translatedHTML) => {
+    // Handle the translated HTML string
+    console.log(translatedHTML);
+  })
+  .catch((error) => {
+    console.error(error.message);
+  });
 
-1. Access the homepage:
-    
-    ```
-    GET <http://localhost:3000/>
-    
-    ```
-    
-2. Translate a web page:
-    
-    ```
-    GET <http://localhost:3000/translate?url=><URL_OF_WEB_PAGE>
-    
-    ```
-    
+```
 
-## Limitations
+Make sure to replace 'YOUR_API_KEY' and 'YOUR_USER_ID' with your actual ULCA API key and user ID.
 
-- The web server is not able to translate websites that use client-side rendering
-- The web server is not able to translate websites that use cookies for authentication.
-- The web server is not able to translate websites that use authentication tokens for authentication tokens for authentication.
-- The web server is not able to translate websites that use sessions for authentication.
+## **Features**
 
-## Important Notes
+- **Efficient Translation Pipeline:** Utilizes ULCA APIs for an optimized translation process.
+- **Error Handling:** Includes automatic retries with a fail count limit for robustness.
+- **DOM and HTML Support:** Enables translation of both DOM elements and HTML strings.
 
-- Ensure that the required environment variables (`BHASHINI_API_KEY` and `BHASHINI_USER_ID`) are set in the `.env` file.
-- The server is set to listen on port 3000 by default. Adjust the `app.listen` method in `index.js` if a different port is desired.
+## **License**
 
-## Conclusion
+This project is licensed under the MIT License - see the [LICENSE](https://chat.openai.com/c/LICENSE) file for details.
 
-This Web Server translates web page content using the Bhashini translation service. Developers can extend and modify the application to meet specific requirements or integrate it into other projects.
+## **Acknowledgments**
+
+- Bhashini Web Translator is powered by ULCA APIs.
