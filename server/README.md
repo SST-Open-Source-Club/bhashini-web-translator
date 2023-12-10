@@ -65,9 +65,10 @@ The server will be accessible at `http://localhost:3000`.
 ### 2. `/translate`
 
 - **Method**: GET
-- **Description**: Send the URL of the website to translate in the JSON format. The response will be the translated website
-- **Parameters**:
-    - `url` (string): The URL of the web page to be translated.
+- **Description**: Send the URL of the website to translate in the JSON format. The response will be the translated websit
+- **Parameters**: `url` (required): The URL to be translated.
+- **Example**: localhost:3000/translate?url="https://www.wikipedia.org/"
+
 
 ## Usage
 

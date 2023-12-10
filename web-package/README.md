@@ -9,7 +9,6 @@ Bhashini Web Translator is an npm package that enables seamless language transla
 To install Bhashini Web Translator, use the following npm command:
 
 ```bash
-bashCopy code
 npm install bhashini-web-translator
 
 ```
@@ -25,7 +24,7 @@ const translator = new BhashiniTranslator('YOUR_API_KEY', 'YOUR_USER_ID');
 
 // Example: Translate a DOM element
 const sourceLanguage = 'en';
-const targetLanguage = 'fr';
+const targetLanguage = 'hi';
 const domElement = document.getElementById('yourElementId');
 
 translator.translateDOM(domElement, sourceLanguage, targetLanguage, batchSize)

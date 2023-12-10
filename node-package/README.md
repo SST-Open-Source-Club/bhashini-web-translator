@@ -9,7 +9,6 @@ This npm package that allows you to easily integrate language translation capabi
 To install Bhashini Web Translator, use the following npm command:
 
 ```bash
-bashCopy code
 npm install bhashini-web-translator
 
 ```
@@ -18,14 +17,14 @@ npm install bhashini-web-translator
 
 ```jsx
 javascriptCopy code
-import BhashiniTranslator from 'bhashini-web-translator';
+import BhashiniTranslator from '@scaler-school-of-technology/bhashini-web-translator';
 
 // Replace 'YOUR_API_KEY' and 'YOUR_USER_ID' with your ULCA API key and user ID
 const translator = new BhashiniTranslator('YOUR_API_KEY', 'YOUR_USER_ID');
 
 // Example: Translate a DOM element
 const sourceLanguage = 'en';
-const targetLanguage = 'fr';
+const targetLanguage = 'hi';
 const domElement = document.getElementById('yourElementId');
 
 translator.translateDOM(domElement, sourceLanguage, targetLanguage, batchSize)
