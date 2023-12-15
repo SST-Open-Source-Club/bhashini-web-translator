@@ -6,7 +6,7 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   width: 280px;
-  height: 380px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
 }
@@ -128,4 +128,19 @@ label {
   font-size: 12px;
   font-weight: bolder;
   line-height: normal;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  justify-content: center;
+}
+
+.checkbox-container label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  width: 100%;
 }

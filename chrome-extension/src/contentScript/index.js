@@ -4,7 +4,6 @@ const Bhashini = new BhashiniTranslator(
   '019a562b7f-bb9c-4440-8b79-11b170353130',
   '48115d2ab7f24c55b8b29af34806050c',
 )
-
 chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
   if (request.action === 'translateContent') {
     try {
