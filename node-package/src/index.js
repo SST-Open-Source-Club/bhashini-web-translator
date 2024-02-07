@@ -1,14 +1,38 @@
 import axios from "axios";
-import { mapNodesAndText } from "./utils/translateDOM.js";
+import { levelOrderTraverse } from "./utils/translateDOM.js";
 import { htmlStringToDOM } from "./utils/convert.js";
 
 class BhashiniTranslator {
+  /**
+   * @type {{pipelineInferenceAPIEndPoint: {callbackUrl: String; inferenceApiKey: {value: String}}}; pipelineResponseConfig: Array<{config: {serviceId: String}}>}}
+   */
   #pipelineData;
+  /**
+   * @type {String}
+   */
   #apiKey;
+  /**
+   * @type {String}
+   */
   #userID;
+  /**
+   * @type {String}
+   */
   #sourceLanguage;
+  /**
+   * @type {String}
+   */
   #targetLanguage;
+  /**
+   * @type {Number}
+   */
   failcount = 0;
+
+  /**
+   *
+   * @param {String} apiKey
+   * @param {String} userID
+   */
   constructor(apiKey, userID) {
     if (!apiKey || !userID) {
       throw new Error("Invalid credentials");
@@ -17,6 +41,11 @@ class BhashiniTranslator {
     this.#userID = userID;
   }
 
+  /**
+   *
+   * @param {String} sourceLanguage
+   * @param {String} targetLanguage
+   */
   async #getPipeline(sourceLanguage, targetLanguage) {
     this.#sourceLanguage = sourceLanguage;
     this.#targetLanguage = targetLanguage;
@@ -52,11 +81,18 @@ class BhashiniTranslator {
 
     this.#pipelineData = response.data;
   }
-
+  /**
+   *
+   * @param {Array<String>} contents
+   * @param {String} sourceLanguage
+   * @param {String} targetLanguage
+   * @returns {Promise<Array<{source: String; target: String}>>}
+   */
   async #translate(contents, sourceLanguage, targetLanguage) {
     if (!this.#pipelineData) {
       throw new Error("pipelineData not found");
     }
+
     const callbackURL =
       this.#pipelineData.pipelineInferenceAPIEndPoint.callbackUrl;
     const inferenceApiKey =
@@ -116,7 +152,14 @@ class BhashiniTranslator {
     this.failcount = 0;
     return resp.pipelineResponse[0].output;
   }
-
+  /**
+   *
+   * @param {HTMLElement} dom
+   * @param {String} sourceLanguage
+   * @param {String} targetLanguage
+   * @param {Number} batchSize
+   * @returns {Promise<HTMLElement>}
+   */
   async translateDOM(dom, sourceLanguage, targetLanguage, batchSize) {
     if (
       !this.#pipelineData ||
@@ -125,37 +168,42 @@ class BhashiniTranslator {
     ) {
       await this.#getPipeline(sourceLanguage, targetLanguage);
     }
-
-    const map = new Map();
-    mapNodesAndText(dom, map);
-
-    const batchedTexts = Array.from(map.keys());
-    const batches = [];
-    for (let i = 0; i < batchedTexts.length; i += batchSize) {
-      batches.push(batchedTexts.slice(i, i + batchSize));
-    }
-
-    const promises = batches.map(async (batch) => {
-      const combinedText = batch;
-      const translated = await this.#translate(
-        combinedText,
-        this.#sourceLanguage,
-        this.#targetLanguage,
-        batchSize
+    /**
+     * @type {Array<Array<HTMLElement>>}
+     */
+    const nodes2d = [];
+    /**
+     * @type {Array<Promise<void>>}
+     */
+    const promises = [];
+    levelOrderTraverse(dom, nodes2d, batchSize);
+    for (const nodes of nodes2d) {
+      promises.push(
+        new Promise(async (res) => {
+          const translatedList = await this.#translate(
+            nodes.map((node) => node.textContent),
+            sourceLanguage,
+            targetLanguage
+          );
+          nodes.forEach((node, idx) => {
+            node.textContent = translatedList[idx].target;
+          });
+          res();
+        })
       );
-
-      batch.forEach((text, index) => {
-        map.get(text).forEach((node) => {
-          node.textContent = " " + translated[index].target + " ";
-        });
-      });
-    });
-
+    }
     await Promise.all(promises);
 
     return dom;
   }
-
+  /**
+   *
+   * @param {String} html
+   * @param {String} sourceLanguage
+   * @param {String} targetLanguage
+   * @param {Number} batchSize
+   * @returns {Promise<HTMLElement>}
+   */
   async translateHTMLstring(html, sourceLanguage, targetLanguage, batchSize) {
     const dom = htmlStringToDOM(html);
     const translated = await this.translateDOM(
