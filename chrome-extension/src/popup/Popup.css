@@ -51,8 +51,8 @@
 
 .footer-cont {
   display: flex;
-  align-items: end;
-  justify-content: start;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .footer {
@@ -100,7 +100,7 @@
   border-radius: 0px;
 }
 
-.language-select-container button {
+#translateButton {
   margin-top: 15px;
   width: 122px;
   height: 30px;
@@ -118,10 +118,10 @@
   transition: background-color 0.3s ease-in-out;
 }
 
-.language-select-container button:hover {
+#translateButton:hover {
   background-color: #113baf9a;
 }
-.language-select-container button:disabled {
+#translateButton:disabled {
   background-color: #979797;
 }
 .footer-ctn {
@@ -140,7 +140,7 @@ label {
   font-weight: bolder;
   line-height: normal;
 }
-#loading-img{
+#loading-img {
   height: 30px;
   width: 30px;
   transform: rotate(0deg);
@@ -148,9 +148,54 @@ label {
   animation: rotateAnimation 2s linear infinite;
 }
 
-
 @keyframes rotateAnimation {
   to {
     transform: rotate(360deg);
   }
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  justify-content: center;
+}
+
+.checkbox-container label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  width: 100%;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  margin-top: 1rem;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset-btn {
+  margin-top: 10px;
+  border: none;
+  outline: none;
+  width: 40px;
+  height: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  background-color: white;
+}
+
+.reset-btn img {
+  width: 100%;
+  height: 100%;
 }
