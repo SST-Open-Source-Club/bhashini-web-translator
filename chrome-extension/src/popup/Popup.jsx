@@ -26,13 +26,11 @@ export const Popup = () => {
   }
 
   const handleTranslateClick = () => {
+    const errorMessage = document.querySelector('.errorMessage')
     if (targetLanguage === 'none') {
-      // return alert('Please select a language to translate to.')
-      const errorMessage = document.querySelector('.errorMessage')
       errorMessage.style.display = 'flex'
       return
     }
-    const errorMessage = document.querySelector('.errorMessage')
     errorMessage.style.display = 'none'
     setTranslating(true)
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -68,7 +66,6 @@ export const Popup = () => {
     const errorMessage = document.querySelector('.errorMessage')
     errorMessage.style.display = 'none'
 
-    // refresh the page
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       chrome.tabs.reload(tabs[0].id)
     })
