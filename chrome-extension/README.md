@@ -1,4 +1,4 @@
-# my-crx-app
+# chrome-extension
 
 > a chrome extension tools built with Vite + React, and Manifest v3
 
@@ -10,24 +10,9 @@
 
 ## Developing
 
-run the command
+Create a new file `.env` in the `chrome-extension` directory by referring to the `.env.example` file in the `chrome-extension` directory.
 
-```shell
-$ cd my-crx-app
-
-$ npm run dev
-```
-
-### Chrome Extension Developer Mode
-
-1. set your Chrome browser 'Developer mode' up
-2. click 'Load unpacked', and select `my-crx-app/build` folder
-
-### Nomal FrontEnd Developer Mode
-
-1. access `http://0.0.0.0:3000/`
-2. when debugging popup page, open `http://0.0.0.0:3000//popup.html`
-3. when debugging options page, open `http://0.0.0.0:3000//options.html`
+Add your API Key and User ID into the `.env` file.
 
 ## Packing
 
@@ -37,7 +22,13 @@ After the development of your extension run the command
 $ npm run build
 ```
 
-Now, the content of `build` folder will be the extension ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) to more infos about publishing.
+### Chrome Extension Developer Mode
+
+1. set your Chrome browser 'Developer mode' up
+2. click 'Load unpacked', and select `build` folder
+
+
+Now, the content of `build` folder will be the extension, which will be ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) for more info about publishing.
 
 ---
 
