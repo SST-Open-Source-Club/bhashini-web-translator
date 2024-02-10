@@ -26,6 +26,9 @@ export const Popup = () => {
   }
 
   const handleTranslateClick = () => {
+    const targetLanguageButton = document.getElementById('targetLanguage')
+    targetLanguageButton.setAttribute('disabled', 'true')
+
     const errorMessage = document.querySelector('.errorMessage')
     if (targetLanguage === 'none') {
       errorMessage.style.display = 'flex'
@@ -43,8 +46,10 @@ export const Popup = () => {
         },
         (response) => {
           if (response === 'success') {
+            targetLanguageButton.removeAttribute('disabled')
             setTranslating(false)
           } else {
+            targetLanguageButton.removeAttribute('disabled')
             setTranslating(false)
           }
         },
