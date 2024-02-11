@@ -1,5 +1,10 @@
 import { JSDOM } from "jsdom";
 
+/**
+ *
+ * @param {String} html
+ * @returns {HTMLElement}
+ */
 export const htmlStringToDOM = (html) => {
   const dom = new JSDOM(html);
   if (dom.window.document.body.textContent === html) {
