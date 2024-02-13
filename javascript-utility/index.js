@@ -24,6 +24,8 @@ function bhashini_addPopup() {
   popup.className = "bhashini-popup";
   var container = document.createElement("div");
   container.className = "language-select-container";
+  var header = document.createElement("div");
+  header.className = "header";
 
   // Create the logo image
   var logo = document.createElement("img");
@@ -31,7 +33,21 @@ function bhashini_addPopup() {
     "https://github.com/SST-Open-Source-Club/bhashini-web-translator/blob/main/chrome-extension/public/img/logo.png?raw=true";
   logo.alt = "Bhashini";
   logo.className = "logo";
-  container.appendChild(logo);
+
+  //create close button
+  var closeBtn = document.createElement("button");
+  closeBtn.className = "close-btn";
+  closeBtn.textContent = "X";
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+    var button = document.querySelector(".bhashini-button");
+    button.style.display = "block";
+  });
+  header.appendChild(logo);
+  header.appendChild(closeBtn);
+  container.appendChild(header);
+
+  
 
   // Create the select container for translating to
   var selectCtnTo = document.createElement("div");
@@ -113,6 +129,16 @@ function bhashini_addPopup() {
   // Create the footer container
   var footerCont = document.createElement("div");
   footerCont.className = "footer-cont";
+  var reloadButton = document.createElement("div");
+  reloadButton.className = "reload-btn";
+  var reloadImg = document.createElement("img");
+  reloadImg.src = "https://github.com/SST-Open-Source-Club/bhashini-web-translator/blob/main/chrome-extension/public/img/reset.png?raw=true";
+  reloadImg.alt = "reload";
+  reloadButton.appendChild(reloadImg);
+  reloadButton.addEventListener("click", () => { 
+    location.reload();
+  });
+  
   var footer = document.createElement("footer");
   footer.className = "footer-ctn";
   var footerLabel = document.createElement("label");
@@ -126,6 +152,7 @@ function bhashini_addPopup() {
   scalerLogo.className = "scaler-logo";
   footer.appendChild(scalerLogo);
   footerCont.appendChild(footer);
+  footerCont.appendChild(reloadButton);
   container.appendChild(footerCont);
 
   // Append the container to the body or any other desired parent element
@@ -158,6 +185,25 @@ function bhashini_injectStyles() {
     .bhashini-button :hover {
       background-color: rgb(0,0,0,0.5);
       background-blend-mode: multiply;
+    }
+
+    .bhashini-popup .language-select-container .close-btn {
+      width: 30px;
+      text-align: center;
+      hieight: 20px;
+      border-radius: 100%;
+      position: absolute;
+      right: 40px;
+      top: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #ff0000;
+    }
+    .bhashini-popup .language-select-container .close-btn:hover {
+      background-color: #ff0000;
+      color: #fff;
     }
 
     .bhashini-popup {
@@ -226,9 +272,9 @@ function bhashini_injectStyles() {
     .bhashini-popup .footer-cont {
       display: flex;
       align-items: end;
-      justify-content: start;
+      justify-content: space-between;
     }
-    
+
     .bhashini-popup .footer {
       width: 70px;
       /* aspect-ratio: 1; */
@@ -304,6 +350,15 @@ function bhashini_injectStyles() {
       flex-direction: column;
       align-items: start;
       justify-content: start;
+    }
+
+    .bhashini-popup .footer-cont .reload-btn {
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .bhashini-popup .footer-cont .reload-btn img {
+      width: 20px;
+      height: 20px;
     }
     
     .bhashini-popup label {
