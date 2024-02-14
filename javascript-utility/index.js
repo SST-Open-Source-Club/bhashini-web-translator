@@ -9,7 +9,7 @@ var translator = new BhashiniTranslator(API_KEY, USER_ID);
 function bhashini_addButton() {
   var button = document.createElement("img");
   button.src =
-    "https://github.com/SST-Open-Source-Club/bhashini-web-translator/blob/main/chrome-extension/public/img/logo.png?raw=true";
+    "https://icons.iconarchive.com/icons/marcus-roberto/google-play/256/Google-Translate-icon.png";
   button.className = "bhashini-button";
   button.style.zIndex = "9999";
   button.addEventListener("click", function () {
@@ -30,7 +30,7 @@ function bhashini_addPopup() {
   // Create the logo image
   var logo = document.createElement("img");
   logo.src =
-    "https://github.com/SST-Open-Source-Club/bhashini-web-translator/blob/main/chrome-extension/public/img/logo.png?raw=true";
+    "https://raw.githubusercontent.com/SST-Open-Source-Club/bhashini-web-translator/e51036efbebb2f43756262ad0baf301e8c369de4/chrome-extension/public/img/scaler.png";
   logo.alt = "Bhashini";
   logo.className = "logo";
 
@@ -143,14 +143,14 @@ function bhashini_addPopup() {
   footer.className = "footer-ctn";
   var footerLabel = document.createElement("label");
   footerLabel.className = "footer";
-  footerLabel.textContent = "Developed by";
+  footerLabel.textContent = "Powered by";
   footer.appendChild(footerLabel);
-  var scalerLogo = document.createElement("img");
-  scalerLogo.src =
-    "https://raw.githubusercontent.com/SST-Open-Source-Club/bhashini-web-translator/e51036efbebb2f43756262ad0baf301e8c369de4/chrome-extension/public/img/scaler.png";
-  scalerLogo.alt = "Bhashini";
-  scalerLogo.className = "scaler-logo";
-  footer.appendChild(scalerLogo);
+  var bashini_logo = document.createElement("img");
+  bashini_logo.src =
+    "https://github.com/SST-Open-Source-Club/bhashini-web-translator/blob/main/chrome-extension/public/img/logo.png?raw=true";
+  bashini_logo.alt = "Bhashini";
+  bashini_logo.className = "scaler-logo";
+  footer.appendChild(bashini_logo);
   footerCont.appendChild(footer);
   footerCont.appendChild(reloadButton);
   container.appendChild(footerCont);
@@ -175,7 +175,6 @@ function bhashini_injectStyles() {
       padding: 10px 20px;
       color: white;
       border: none;
-      border-radius: 100%;
       cursor: pointer;
       position: fixed;
       bottom: 20px;
@@ -193,8 +192,8 @@ function bhashini_injectStyles() {
       hieight: 20px;
       border-radius: 100%;
       position: absolute;
-      right: 40px;
-      top: 10px;
+      right: 20px;
+      top: 0px;
       background: none;
       border: none;
       cursor: pointer;
@@ -207,10 +206,8 @@ function bhashini_injectStyles() {
     }
 
     .bhashini-popup {
-      width: 300px;
       padding: 10px 20px;
-      background-color: grey;
-      color: white;
+      color: black;
       border: none;
       border-radius: 5px;
       cursor: pointer;
@@ -252,8 +249,10 @@ function bhashini_injectStyles() {
       background-repeat: no-repeat, no-repeat;
     }
     .bhashini-popup .logo {
-      width: 86px;
-      height: 79px;
+      padding-top: 10px;
+      padding-left: 10px;
+      width: auto;
+      height: 30px;
       flex-shrink: 0;
       align-self: flex-start; /* Align to the top */
     }
@@ -296,7 +295,7 @@ function bhashini_injectStyles() {
       justify-content: center;
     }
     .bhashini-popup .scaler-logo {
-      width: 64px;
+      width: 40px;
       height: auto;
       flex-shrink: 0;
     }
@@ -346,7 +345,6 @@ function bhashini_injectStyles() {
       background-color: #979797;
     }
     .bhashini-popup .footer-ctn {
-      margin-top: 16px;
       display: flex;
       flex-direction: column;
       align-items: start;
