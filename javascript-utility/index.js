@@ -264,6 +264,7 @@ function bhashini_injectStyles() {
       flex-shrink: 0;
     }
     .bhashini-popup .translate-to {
+      color: black;
       width: 224px;
       height: 55px;
       flex-shrink: 0;
