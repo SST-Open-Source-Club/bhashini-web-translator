@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export const Popup = ({ auto, targetL, bhashiniTranslator, translatinga }) => {
+export const Popup = ({
+  currentScriptSrc,
+  auto,
+  targetL,
+  bhashiniTranslator,
+  translatinga,
+}) => {
   const [targetLanguage, setTargetLanguage] = useState(targetL || "none");
   const [translating, setTranslating] = useState(translatinga);
   const [isDefault, setDefault] = useState(auto);
@@ -66,8 +72,8 @@ export const Popup = ({ auto, targetL, bhashiniTranslator, translatinga }) => {
       }}
     >
       <img
-        src="img/scaler.png"
-        alt="Bhashini"
+        src="https://assets-v2.scaler.com/assets/programs/undergrad/webp/sst-logo-044e63073f49b767e6bca532d5fe0145b768bb12699e822d7cbce37efaa5f8f4.webp.gz"
+        alt="Scaler"
         class="logo"
         style={{
           width: "40%",
@@ -211,7 +217,7 @@ export const Popup = ({ auto, targetL, bhashiniTranslator, translatinga }) => {
           </button>
         ) : (
           <img
-            src="img/loading.png"
+            src={`${currentScriptSrc}/../img/loading.png`}
             alt="load..."
             id="loading-img"
             style={{
@@ -263,7 +269,7 @@ export const Popup = ({ auto, targetL, bhashiniTranslator, translatinga }) => {
             Developed by
           </label>
           <img
-            src="img/logo.png"
+            src={`${currentScriptSrc}/../img/logo.png`}
             alt="Bhashini"
             className="scaler-logo"
             style={{
@@ -296,7 +302,7 @@ export const Popup = ({ auto, targetL, bhashiniTranslator, translatinga }) => {
             }}
           >
             <img
-              src="img/reset.png"
+              src={`${currentScriptSrc}/../img/reset.png`}
               alt="reset"
               data-tooltip-id="reset-tooltip"
               data-tooltip-content="Reset to default settings"

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Pop = ({ triggerElement, children }) => {
+const Pop = ({ triggerElement, children, currentScriptSrc }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePopup = () => {
@@ -42,7 +42,7 @@ const Pop = ({ triggerElement, children }) => {
         >
           <img
             className="popup-close"
-            src="img/close.png"
+            src={`${currentScriptSrc}/../img/close.png`}
             onClick={togglePopup}
             style={{
               position: "absolute",
