@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 // import "./index.css";
 // import "./ppcss.css";
-document.body.innerHTML += '<div id="popup-container"></div>';
+document.body.innerHTML += '<div id="bhashini-popup-container"></div>';
 // console.log(document.currentScript.src);
 var styleElemnent = document.createElement("style");
 styleElemnent.appendChild(
@@ -16,4 +16,6 @@ styleElemnent.appendChild(
   `)
 );
 document.head.appendChild(styleElemnent);
-ReactDOM.createRoot(document.getElementById("popup-container")).render(<App />);
+ReactDOM.createRoot(document.getElementById("bhashini-popup-container")).render(
+  <App />
+);
