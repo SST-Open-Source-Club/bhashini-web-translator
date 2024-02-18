@@ -73,7 +73,7 @@ export const Popup = ({
     >
       <img
         src="https://assets-v2.scaler.com/assets/programs/undergrad/webp/sst-logo-044e63073f49b767e6bca532d5fe0145b768bb12699e822d7cbce37efaa5f8f4.webp.gz"
-        alt="Scaler"
+        alt="Scaler School of Technology "
         class="logo"
         style={{
           width: "40%",
@@ -185,7 +185,6 @@ export const Popup = ({
         className="btn-container"
         style={{
           paddingTop: "20px",
-          height: "24px",
           display: "flex",
           justifyContent: "center",
         }}
