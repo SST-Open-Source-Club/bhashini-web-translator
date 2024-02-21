@@ -10,6 +10,7 @@ export const Popup = ({
   const [targetLanguage, setTargetLanguage] = useState(targetL || "none");
   const [translating, setTranslating] = useState(translatinga);
   const [isDefault, setDefault] = useState(auto);
+  const [rerenderKey, setRerenderKey] = useState(0);
 
   const handleTargetLanguageChange = (e) => {
     setTargetLanguage(e.target.value);
@@ -36,6 +37,7 @@ export const Popup = ({
       .then((res) => {
         targetLanguageButton.removeAttribute("disabled");
         setTranslating(false);
+        setRerenderKey((prev) => prev + 1);
       })
       .catch((err) => {
         targetLanguageButton.removeAttribute("disabled");
@@ -57,6 +59,7 @@ export const Popup = ({
 
   return (
     <div
+      key={rerenderKey}
       className="language-select-container script"
       style={{
         padding: "20px",
