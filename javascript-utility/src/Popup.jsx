@@ -145,7 +145,7 @@ export const Popup = ({
           marginTop: "5px",
         }}
       >
-        <span>* Plese select a target language</span>
+        <span>* Please select a target language</span>
       </div>
       <div
         className="checkbox-container"
