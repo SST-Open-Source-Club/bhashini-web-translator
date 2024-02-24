@@ -26,14 +26,14 @@ export const Popup = () => {
   }
 
   const handleTranslateClick = () => {
-    const targetLanguageButton = document.getElementById('targetLanguage')
-    targetLanguageButton.setAttribute('disabled', 'true')
-
     const errorMessage = document.querySelector('.errorMessage')
     if (targetLanguage === 'none') {
       errorMessage.style.display = 'flex'
       return
     }
+    const targetLanguageButton = document.getElementById('targetLanguage')
+    targetLanguageButton.setAttribute('disabled', 'true')
+
     errorMessage.style.display = 'none'
     setTranslating(true)
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {

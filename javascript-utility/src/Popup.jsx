@@ -8,6 +8,7 @@ export const Popup = ({
   translatinga,
 }) => {
   const [targetLanguage, setTargetLanguage] = useState(targetL || "none");
+  const [sourceLanguage, setSourceLanguage] = useState("en");
   const [translating, setTranslating] = useState(translatinga);
   const [isDefault, setDefault] = useState(auto);
   const [rerenderKey, setRerenderKey] = useState(0);
@@ -33,11 +34,12 @@ export const Popup = ({
     errorMessage.style.display = "none";
     setTranslating(true);
     bhashiniTranslator
-      .translateDOM(document.body, "en", targetLanguage, "22")
+      .translateDOM(document.body, sourceLanguage, targetLanguage, 22)
       .then((res) => {
         targetLanguageButton.removeAttribute("disabled");
         setTranslating(false);
         setRerenderKey((prev) => prev + 1);
+        setSourceLanguage(targetLanguage);
       })
       .catch((err) => {
         targetLanguageButton.removeAttribute("disabled");
