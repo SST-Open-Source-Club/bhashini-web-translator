@@ -3,9 +3,9 @@
   background-color: #fff;
   margin: 0px;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  width: 280px;
+  width: 350px;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -17,12 +17,12 @@
 }
 
 .language-select-container select {
-  height: fit-content;
+  height: 50px;
   width: 224px;
   margin-top: 20px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  appearance: none; /* Remove default arrow in some browsers */
-  background-image: url('/img/down.png'); /* Add another icon with linear gradient */
+  appearance: none;
+  background-image: url('/img/down.png');
   background-size:
     24px 24px,
     100% 100%;
@@ -30,12 +30,13 @@
     right 8px center,
     right -15px center;
   background-repeat: no-repeat, no-repeat;
+  padding: 5px;
 }
 .logo {
   width: 86px;
   height: 79px;
   flex-shrink: 0;
-  align-self: flex-start; /* Align to the top */
+  align-self: flex-start;
 }
 .translate-from {
   margin: 1;
@@ -57,10 +58,7 @@
 
 .footer {
   width: 70px;
-  /* aspect-ratio: 1; */
-  /* flex-shrink: 0; */
   color: #4b4b4b;
-
   font-family: Inter;
   font-size: 8px;
   font-style: normal;
@@ -198,4 +196,31 @@ label {
 .reset-btn img {
   width: 100%;
   height: 100%;
+}
+
+#globe-btn{
+  background-image: url('../../public/img/translate-icon.png');
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  z-index: 100;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: 200ms ease-in-out;
+}
+
+#globe-btn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.header-extension {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#ext-options {
+  display: none;
 }
