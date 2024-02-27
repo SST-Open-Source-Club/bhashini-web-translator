@@ -90,6 +90,7 @@ export const Popup = () => {
       chrome.tabs.reload(tabs[0].id)
     })
 
+    setCheckBoxDisabled('true')
     setTranslateButtonText('Translate')
     setCheckBoxText('Remember language for future use')
     setErrorMessage('* Please select a target language')
