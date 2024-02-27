@@ -38,6 +38,14 @@ export const Popup = () => {
   },[translating])
 
   const handleTargetLanguageChange = (event) => {
+    if(event.target.value !== 'none') {
+      const errorMessage = document.querySelector('.errorMessage')
+      errorMessage.style.display = 'none'
+      setCheckBoxDisabled(false);
+    }
+    else{
+      setCheckBoxDisabled(true);
+    }
     setTargetLanguage(event.target.value)
     if(event.target.value !== 'none' && !translating) {
       const errorMessage = document.querySelector('.errorMessage')
