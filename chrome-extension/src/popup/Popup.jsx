@@ -28,16 +28,30 @@ export const Popup = () => {
     }
   }
 
+  useEffect(()=>{
+    if(translating){
+      setCheckBoxDisabled(true)
+    }
+    else{
+      setCheckBoxDisabled(false)
+    }
+  },[translating])
+
   const handleTargetLanguageChange = (event) => {
-    if(event.target.value !== 'none') {
+    setTargetLanguage(event.target.value)
+    if(event.target.value !== 'none' && !translating) {
       const errorMessage = document.querySelector('.errorMessage')
       errorMessage.style.display = 'none'
       setCheckBoxDisabled(false);
+      if(isDefault){
+        chrome.storage.sync.set({ targetLanguage: event.target.value }, function () {
+          console.log('Value of target language is set to ' + event.target.value)
+        })
+      }
     }
     else{
       setCheckBoxDisabled(true);
     }
-    setTargetLanguage(event.target.value)
   }
 
   const handleTranslateClick = () => {
@@ -85,6 +99,7 @@ export const Popup = () => {
     setTargetLanguage('none')
     const errorMessage = document.querySelector('.errorMessage')
     errorMessage.style.display = 'none'
+    setExtensionTranslateOptions('en')
 
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       chrome.tabs.reload(tabs[0].id)
@@ -111,7 +126,7 @@ export const Popup = () => {
         if (result.targetLanguage) {
           setTargetLanguage(result.targetLanguage)
         }
-      })
+      })      
       handleTranslateClick()
     }
   }, [isDefault, targetLanguage])
