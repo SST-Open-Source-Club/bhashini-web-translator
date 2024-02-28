@@ -266,7 +266,6 @@ export const Popup = ({
           }}
         >
           <label
-            className="footer"
             style={{
               width: "70px",
               fontFamily: "Inter",
