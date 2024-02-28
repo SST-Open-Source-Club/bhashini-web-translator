@@ -8,14 +8,18 @@ const APiKey = UrlParams.get("BHASHINI_API_KEY");
 const UserId = UrlParams.get("BHASHINI_USER_ID");
 let autoTranslate = localStorage.getItem("autoTranslate") || false;
 let targetLanguage = localStorage.getItem("targetLanguage");
+let docElem = localStorage.getItem("domElem") || false;
+// console.log;
 const bhashiniTranslator = new BhashiniTranslator(APiKey, UserId);
-// console.log(autoTranslate, typeof autoTranslate);
+console.log(autoTranslate, typeof autoTranslate);
 if (autoTranslate === "true") {
   autoTranslate = true;
+  if (docElem) document.body.innerHTML = docElem;
 } else {
+  autoTranslate = false;
   targetLanguage = "none";
 }
-// console.log(APiKey, UserId);
+
 function App() {
   return (
     <>
@@ -24,7 +28,7 @@ function App() {
         children=<Popup
           APIKey={APiKey}
           UserId={UserId}
-          auto={autoTranslate}
+          isDefaultLabel={autoTranslate}
           targetL={targetLanguage}
           bhashiniTranslator={bhashiniTranslator}
           currentScriptSrc={currentScriptSrc}
