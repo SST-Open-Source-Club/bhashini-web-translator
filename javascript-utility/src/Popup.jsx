@@ -7,7 +7,6 @@ export const Popup = ({
   bhashiniTranslator,
   translatinga,
 }) => {
-  console.log("popup jssx " + typeof isDefaultLabel);
   const [targetLanguage, setTargetLanguage] = useState(targetL || "none");
   const [sourceLanguage, setSourceLanguage] = useState("en");
   const [translating, setTranslating] = useState(translatinga);

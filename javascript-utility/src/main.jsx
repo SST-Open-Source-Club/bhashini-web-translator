@@ -17,7 +17,6 @@ styleElement.innerHTML = `
 }
 `;
 
-// Append the style element to the document head
 document.head.appendChild(styleElement);
 
 // Render the app using ReactDOM.render (for React versions prior to 18)

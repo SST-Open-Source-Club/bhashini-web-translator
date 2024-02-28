@@ -9,9 +9,9 @@ const UserId = UrlParams.get("BHASHINI_USER_ID");
 let autoTranslate = localStorage.getItem("autoTranslate") || false;
 let targetLanguage = localStorage.getItem("targetLanguage");
 let docElem = localStorage.getItem("domElem") || false;
-// console.log;
+
 const bhashiniTranslator = new BhashiniTranslator(APiKey, UserId);
-console.log(autoTranslate, typeof autoTranslate);
+
 if (autoTranslate === "true") {
   autoTranslate = true;
   if (docElem) document.body.innerHTML = docElem;
