@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const Popup = ({
   currentScriptSrc,
-  auto,
+  isDefaultLabel,
   targetL,
   bhashiniTranslator,
   translatinga,
@@ -10,11 +10,23 @@ export const Popup = ({
   const [targetLanguage, setTargetLanguage] = useState(targetL || "none");
   const [sourceLanguage, setSourceLanguage] = useState("en");
   const [translating, setTranslating] = useState(translatinga);
-  const [isDefault, setDefault] = useState(auto);
+  const [isDefault, setDefault] = useState(isDefaultLabel);
   const [rerenderKey, setRerenderKey] = useState(0);
+  const [isHovervingReset, setIsHovering] = useState(false);
+
+  const SetHovering = () => {
+    setIsHovering(true);
+  };
+
+  const DeHovering = () => {
+    setIsHovering(false);
+  };
 
   const handleTargetLanguageChange = (e) => {
     setTargetLanguage(e.target.value);
+    if (isDefault) {
+      localStorage.setItem("targetLanguage", e.target.value);
+    }
     document.getElementById("translateButton").focus();
   };
 
@@ -38,8 +50,9 @@ export const Popup = ({
       .then((res) => {
         targetLanguageButton.removeAttribute("disabled");
         setTranslating(false);
-        setRerenderKey((prev) => prev + 1);
         setSourceLanguage(targetLanguage);
+        localStorage.setItem("domElem", document.body.innerHTML);
+        setRerenderKey((prev) => prev + 1);
       })
       .catch((err) => {
         targetLanguageButton.removeAttribute("disabled");
@@ -49,14 +62,14 @@ export const Popup = ({
 
   const handleDefault = (e) => {
     setDefault((prev) => !prev);
-    localStorage.setItem("autoTranslate", e.target.checked.toString());
+    if (e.target.checked) localStorage.setItem("autoTranslate", true);
+    else localStorage.setItem("autoTranslate", false);
     localStorage.setItem("targetLanguage", targetLanguage);
   };
 
   const handleReset = () => {
+    localStorage.clear();
     window.location.reload();
-    localStorage.setItem("autoTranslate", "false");
-    localStorage.setItem("targetLanguage", "none");
   };
 
   return (
@@ -64,7 +77,7 @@ export const Popup = ({
       key={rerenderKey}
       className="language-select-container script"
       style={{
-        padding: "20px",
+        padding: "5px",
         backgroundColor: "white",
         margin: "0",
         borderRadius: "5xp",
@@ -76,17 +89,23 @@ export const Popup = ({
         flexDirection: "column",
       }}
     >
-      <img
-        src="https://assets-v2.scaler.com/assets/programs/undergrad/webp/sst-logo-044e63073f49b767e6bca532d5fe0145b768bb12699e822d7cbce37efaa5f8f4.webp.gz"
-        alt="Scaler School of Technology "
-        class="logo"
+      <div
         style={{
-          width: "40%",
-          aspectRatio: "3/2",
-          objectFit: "contain",
-          flexShrink: "0",
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "10px",
         }}
-      />
+      >
+        <img
+          src="https://assets-v2.scaler.com/assets/programs/undergrad/webp/sst-logo-044e63073f49b767e6bca532d5fe0145b768bb12699e822d7cbce37efaa5f8f4.webp.gz"
+          alt="Scaler School of Technology "
+          class="logo"
+          style={{
+            width: "40%",
+            marginBottom: "10px",
+          }}
+        />
+      </div>
 
       <div
         className="selectCtn"
@@ -97,7 +116,6 @@ export const Popup = ({
       >
         <label
           style={{
-            color: "#5a5a5a",
             fontSize: "12px",
             fontWeight: "bolder",
             lineHeight: "normal",
@@ -113,9 +131,8 @@ export const Popup = ({
           style={{
             height: "fit-content",
             width: "224px",
-            marginTop: "20px",
+            marginTop: "2px",
             boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.1)",
-            appearance: "none",
             backgroundSize: "24px 24px, 100% 100%",
             backgroundPosition: "right 8px center, right -15px center",
             backgroundRepeat: "no-repeat, no-repeat",
@@ -155,7 +172,6 @@ export const Popup = ({
       <div
         className="checkbox-container"
         style={{
-          display: "none",
           alignItems: "center",
           marginTop: "5px",
           justifyContent: "center",
@@ -164,8 +180,7 @@ export const Popup = ({
         <label
           for="saveAsDefault"
           style={{
-            marginTop: "20px",
-            color: "#5a5a5a",
+            marginTop: "6px",
             fontSize: "12px",
             fontWeight: "bolder",
             lineHeight: "normal",
@@ -189,7 +204,7 @@ export const Popup = ({
       <div
         className="btn-container"
         style={{
-          paddingTop: "20px",
+          paddingTop: "2px",
           display: "flex",
           justifyContent: "center",
         }}
@@ -200,7 +215,7 @@ export const Popup = ({
             disabled={false}
             onClick={handleTranslateClick}
             style={{
-              marginTop: "15px",
+              marginTop: "10px",
               width: "122px",
               height: "30px",
               flexShrink: "0",
@@ -245,26 +260,18 @@ export const Popup = ({
         <footer
           className="footer-ctn"
           style={{
-            marginBottom: "5px",
-            marginLeft: "5px",
-            marginTop: "16px",
             display: "flex",
             flexDirection: "column",
-            alignItems: "end",
-            justifyContent: "start",
           }}
         >
           <label
-            className="footer"
             style={{
               width: "70px",
-              color: "#4b4b4b",
               fontFamily: "Inter",
               fontSize: "8px",
               fontStyle: "normal",
               fontWeight: "400",
               lineHeight: "normal",
-              color: "#5a5a5a",
               fontSize: "12px",
               fontWeight: "bolder",
               lineHeight: "normal",
@@ -288,6 +295,8 @@ export const Popup = ({
         <div className="reset-ctn">
           <button
             className="reset-btn"
+            onMouseOver={SetHovering}
+            onMouseLeave={DeHovering}
             onClick={handleReset}
             style={{
               marginTop: "10px",
@@ -303,9 +312,11 @@ export const Popup = ({
               cursor: "pointer",
               transition: "background-color 0.3s ease-in-out",
               backgroundColor: "white",
+              position: "relative", // Ensure the parent is positioned relatively
             }}
           >
             <img
+              className="reset-btn"
               src={`${currentScriptSrc}/../img/reset.png`}
               alt="reset"
               data-tooltip-id="reset-tooltip"
@@ -315,6 +326,31 @@ export const Popup = ({
                 height: "100%",
               }}
             />
+            {isHovervingReset ? (
+              <span
+                className="tooltip"
+                style={{
+                  visibility: "visible",
+                  maxWidth: "100px", // Set maximum width
+                  backgroundColor: "#f0f0f0", // Light background color
+                  color: "#000", // Text color
+                  textAlign: "center",
+                  padding: "5px",
+                  borderRadius: "6px",
+                  position: "absolute",
+                  zIndex: "1",
+                  top: "10%", // Position a little higher
+                  left: "-110%", // Position to the left
+                  transform: "translate(0, -50%)", // Move it up by half its height
+                  whiteSpace: "normal", // Allow word wrapping
+                  fontSize: "10px", // Smaller font size
+                }}
+              >
+                Reset to Original Page
+              </span>
+            ) : (
+              <div></div>
+            )}
           </button>
         </div>
       </div>
